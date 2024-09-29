@@ -1,38 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/history_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calculation History"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"/>
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/history_recycler_view"
+    <ListView
+        android:id="@+id/history_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/history_title"
-        android:layout_above="@id/back_button"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:padding="8dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-    <Button
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back to Main"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#8E44AD"
-        android:textColor="#FFFFFF"/>
-
-</RelativeLayout>
+</LinearLayout>

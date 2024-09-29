@@ -1,41 +1,52 @@
 package com.example.taxloancalci;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.taxloancalci.data.AppDatabase;
+import com.example.taxloancalci.data.CalculationEntity;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private HistoryAdapter adapter;
-    private List<HistoryItem> historyItems;
+    private AppDatabase db;
+    private ListView historyListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        recyclerView = findViewById(R.id.history_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        db = AppDatabase.getDatabase(this);
+        historyListView = findViewById(R.id.history_list_view);
 
-        historyItems = getHistoryItems(); // You'll need to implement this method
-        adapter = new HistoryAdapter(historyItems);
-        recyclerView.setAdapter(adapter);
-
-        Button backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(v -> finish());
+        loadHistory();
     }
 
-    private List<HistoryItem> getHistoryItems() {
-        // This is where you'd typically fetch the history from a database or shared preferences
-        // For now, we'll just return some dummy data
-        List<HistoryItem> items = new ArrayList<>();
-        items.add(new HistoryItem("GST Calculation", "Total: ₹1000, GST: ₹180", "2023-05-01"));
-        items.add(new HistoryItem("EMI Calculation", "Loan: ₹100000, EMI: ₹2000", "2023-05-02"));
-        return items;
+    private void loadHistory() {
+        new Thread(() -> {
+            List<CalculationEntity> calculations = db.calculationDao().getAllCalculations();
+            List<String> historyItems = new ArrayList<>();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+            for (CalculationEntity calc : calculations) {
+                String dateString = sdf.format(new Date(calc.timestamp));
+                historyItems.add(calc.type + " - " + dateString + "\n" + calc.details);
+            }
+
+            runOnUiThread(() -> {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                        android.R.layout.simple_list_item_1, historyItems);
+                historyListView.setAdapter(adapter);
+            });
+        }).start();
     }
 }
