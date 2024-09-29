@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    tools:context=".gst_calculator">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_view"
+        android:padding="16dp"
+        app:srcCompat="@drawable/taxes" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/carter_one"
+        android:text="@string/gst_calculator"
+        android:textColor="#000000"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/total_price_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/akaya_telivigala"
+        android:text="@string/total_price"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <SeekBar
+        android:id="@+id/total_price_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/total_price_textview"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="8dp"
+        android:max="100000"
+        android:progressTint="#8E44AD"
+        android:thumbTint="#8E44AD" />
+
+    <TextView
+        android:id="@+id/gst_percentage_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/total_price_seekbar"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/akaya_telivigala"
+        android:text="@string/gst_percentage_0"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <SeekBar
+        android:id="@+id/gst_percentage_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gst_percentage_textview"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="8dp"
+        android:max="28"
+        android:progressTint="#8E44AD"
+        android:thumbTint="#8E44AD" />
+
+    <TextView
+        android:id="@+id/gst_price_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gst_percentage_seekbar"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/akaya_telivigala"
+        android:text="@string/gst_price_0"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/net_price_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gst_price_textview"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/akaya_telivigala"
+        android:text="@string/net_price_0"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/back_to_main_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BACK TO MAIN"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#8E44AD"
+        android:paddingHorizontal="32dp"
+        android:textColor="#FFFFFF"/>
+
+</RelativeLayout>

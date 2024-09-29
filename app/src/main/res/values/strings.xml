@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">TaxLoan Calci</string>
+    <string name="todo">TODO</string>
+    <string name="total_price_0">Total Price: $ 0</string>
+    <string name="down_payment_0">down_payment: 0</string>
+    <string name="loan_amount_0">loan amount:$ 0</string>
+    <string name="intrest_rate_0">Intrest_rate:% 0</string>
+    <string name="tenure_0">Tenure: 0</string>
+    <string name="emi_0">EMI: $ 0</string>
+    <string name="emi_calculator">EMI CALCULATOR</string>
+    <string name="textview">TextView</string>
+    <string name="price">price:</string>
+    <string name="interest">interest</string>
+    <string name="emi">emi</string>
+    <string name="tenure">tenure:</string>
+    <string name="down_payment">down_payment:</string>
+    <string name="loan_amount">loan amount:</string>
+    <string name="gst_calculator">GST Calculator</string>
+    <string name="gst_price_0">GST Price: 0</string>
+    <string name="net_price_0">Net Price: 0</string>
+    <string name="gst_percentage_0">GST Percentage: 0%</string>
+    <string name="total_price">Total Price: ₹</string>
+    <string name="todo1">TODO</string>
+    <string name="loan">TextView</string>
+    <string name="interest2">TextView</string>
+    <string name="emi2">TextView</string>
+    <string name="tenure2">TextView</string>
+    <string name="total1">TextView</string>
+    <string name="down1">TextView</string>
+    <string name="total_price_50000">Total Price: ₹00000</string>
+    <string name="down_payment_5000">Down Payment: ₹00000</string>
+    <string name="loan_amount_45000">Loan Amount: ₹00000</string>
+    <string name="interest_rate_10">Interest Rate: 10%</string>
+    <string name="tenure_15_years">Tenure:  years</string>
+    <string name="emi_">EMI: ₹0</string>
+</resources>
