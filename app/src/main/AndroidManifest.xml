@@ -12,6 +12,9 @@
         android:theme="@style/Theme.TaxLoanCalci"
         tools:targetApi="31">
         <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".emi"
             android:exported="false" />
         <activity
