@@ -1,13 +1,13 @@
 package com.example.taxloancalci;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.Switch;
 
 import com.example.taxloancalci.data.AppDatabase;
 
@@ -18,9 +18,16 @@ public class MainActivity extends AppCompatActivity {
     private ImageView emiImage;
     private Button viewHistoryButton;
     private Button sendFeedbackButton;
+    private Switch darkModeSwitch;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply the theme before calling super.onCreate and setContentView
+        sharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("DarkMode", false);
+        setTheme(isDarkMode);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -32,50 +39,44 @@ public class MainActivity extends AppCompatActivity {
         emiImage = findViewById(R.id.emic);
         viewHistoryButton = findViewById(R.id.history_button);
         sendFeedbackButton = findViewById(R.id.feedback_button);
+        darkModeSwitch = findViewById(R.id.theme_switch);
+
+        // Set the initial state of the switch
+        darkModeSwitch.setChecked(isDarkMode);
 
         // Set click listeners
-        gstTaxImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, gst_calculator.class);
-                startActivity(intent);
-            }
-        });
+        gstTaxImage.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, gst_calculator.class)));
+        emiImage.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, emi.class)));
+        viewHistoryButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, HistoryActivity.class)));
+        sendFeedbackButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FeedbackActivity.class)));
 
-        emiImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, emi.class);
-                startActivity(intent);
-            }
-        });
-
-        viewHistoryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        sendFeedbackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendFeedback();
-            }
+        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setTheme(isChecked);
+            sharedPreferences.edit().putBoolean("DarkMode", isChecked).apply();
+            recreate();
         });
     }
 
-    private void sendFeedback() {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"your.email@example.com"});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for TaxLoan Calci App");
+    private void setTheme(boolean isDarkMode) {
+        AppCompatDelegate.setDefaultNightMode(isDarkMode ?
+                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+    }
 
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "No email app found", Toast.LENGTH_SHORT).show();
+    @Override
+    public void recreate() {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        startActivity(getIntent());
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Check if the theme has changed while in another activity
+        boolean currentTheme = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
+        if (currentTheme != sharedPreferences.getBoolean("DarkMode", false)) {
+            recreate();
         }
     }
 }

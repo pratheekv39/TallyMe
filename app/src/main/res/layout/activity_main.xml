@@ -38,7 +38,7 @@
         android:fontFamily="@font/poppins_medium"
         android:text="Quick GST and EMI calculations at your fingertips"
         android:textAlignment="center"
-        android:textColor="#50367E"
+        android:textColor="#000000"
         android:textColorHighlight="#000000"
         android:textColorHint="#000000"
         android:textColorLink="#000000"

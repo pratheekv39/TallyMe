@@ -2,8 +2,11 @@ package com.example.taxloancalci;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.taxloancalci.data.AppDatabase;
@@ -19,6 +22,9 @@ public class HistoryActivity extends AppCompatActivity {
 
     private AppDatabase db;
     private ListView historyListView;
+    private Button backButton;
+    private Button clearHistoryButton;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,12 @@ public class HistoryActivity extends AppCompatActivity {
 
         db = AppDatabase.getDatabase(this);
         historyListView = findViewById(R.id.history_list_view);
+        backButton = findViewById(R.id.back_button);
+        clearHistoryButton = findViewById(R.id.clear_history_button);
+
+        backButton.setOnClickListener(v -> finish());
+
+        clearHistoryButton.setOnClickListener(v -> showClearHistoryConfirmation());
 
         loadHistory();
     }
@@ -43,9 +55,29 @@ public class HistoryActivity extends AppCompatActivity {
             }
 
             runOnUiThread(() -> {
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                adapter = new ArrayAdapter<>(this,
                         android.R.layout.simple_list_item_1, historyItems);
                 historyListView.setAdapter(adapter);
+            });
+        }).start();
+    }
+
+    private void showClearHistoryConfirmation() {
+        new AlertDialog.Builder(this)
+                .setTitle("Clear History")
+                .setMessage("Are you sure you want to clear all calculation history?")
+                .setPositiveButton("Yes", (dialog, which) -> clearHistory())
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void clearHistory() {
+        new Thread(() -> {
+            db.calculationDao().deleteAllCalculations();
+            runOnUiThread(() -> {
+                adapter.clear();
+                adapter.notifyDataSetChanged();
+                Toast.makeText(HistoryActivity.this, "History cleared", Toast.LENGTH_SHORT).show();
             });
         }).start();
     }

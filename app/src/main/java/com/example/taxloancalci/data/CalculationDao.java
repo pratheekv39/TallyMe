@@ -13,4 +13,7 @@ public interface CalculationDao {
 
     @Query("SELECT * FROM calculations ORDER BY timestamp DESC")
     List<CalculationEntity> getAllCalculations();
+
+    @Query("DELETE FROM calculations")
+    void deleteAllCalculations();
 }
