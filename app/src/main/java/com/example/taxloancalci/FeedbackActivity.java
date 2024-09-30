@@ -1,5 +1,5 @@
 package com.example.taxloancalci;
-
+import com.google.firebase.firestore.FirebaseFirestore;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,18 +14,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.taxloancalci.data.AppDatabase;
 import com.example.taxloancalci.data.FeedbackEntity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FeedbackActivity extends AppCompatActivity {
 
     private EditText nameEditText, emailEditText, messageEditText;
     private Button submitButton, rateButton, backButton;
-    private AppDatabase db;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
-        db = AppDatabase.getDatabase(this);
+        db = FirebaseFirestore.getInstance(); // Initialize Firestore
 
         nameEditText = findViewById(R.id.name_edit_text);
         emailEditText = findViewById(R.id.email_edit_text);
@@ -48,32 +51,42 @@ public class FeedbackActivity extends AppCompatActivity {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
+
         if (!isValidEmail(email)) {
             Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
             return;
         }
-        FeedbackEntity feedback = new FeedbackEntity(name, email, message);
 
-        new Thread(() -> {
-            db.feedbackDao().insert(feedback);
-            runOnUiThread(() -> {
-                Toast.makeText(FeedbackActivity.this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
-                finish();
-            });
-        }).start();
+        // Create a feedback object
+        Map<String, Object> feedback = new HashMap<>();
+        feedback.put("name", name);
+        feedback.put("email", email);
+        feedback.put("message", message);
+        feedback.put("timestamp", System.currentTimeMillis());
+
+        // Store feedback in Firestore
+        db.collection("feedback")
+                .add(feedback)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(FeedbackActivity.this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
+                    finish(); // Close the activity
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(FeedbackActivity.this, "Error submitting feedback", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void openGooglePlay() {
-        String appPackageName = getPackageName(); // Use your app's package name
+        String appPackageName = getPackageName();
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
         } catch (android.content.ActivityNotFoundException anfe) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
         }
-    }
-
-    private boolean isValidEmail(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void navigateBackHome() {
