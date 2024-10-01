@@ -9,122 +9,151 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/finance" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/calculator_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView3"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="EMI Calculator"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:fontFamily="@font/akaya_telivigala"/>
 
-        <TextView
-            android:id="@+id/total_price_textview"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/calculator_title"
+        android:layout_above="@id/back_to_main_button"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/akaya_telivigala"
-            android:text="Total Price: ₹000000"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"/>
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <SeekBar
-            android:id="@+id/total_price_seekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="1000000"
-            android:progress="50000"
-            android:progressTint="#00BCD4"
-            android:thumbTint="#00BCD4"/>
+            <TextView
+                android:id="@+id/total_price_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_telivigala"
+                android:text="Total Price: ₹000000"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"/>
 
-        <TextView
-            android:id="@+id/down_payment_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/akaya_telivigala"
-            android:text="Down Payment: ₹000000"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"/>
+            <SeekBar
+                android:id="@+id/total_price_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:max="1000000"
+                android:progress="50000"
+                android:progressTint="#00BCD4"
+                android:thumbTint="#00BCD4"
+                android:paddingVertical="8dp"
+                android:layout_marginVertical="4dp"/>
 
-        <SeekBar
-            android:id="@+id/down_payment_seekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="600000"
-            android:progress="5000"
-            android:progressTint="#00BCD4"
-            android:thumbTint="#00BCD4"/>
+            <TextView
+                android:id="@+id/down_payment_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_telivigala"
+                android:text="Down Payment: ₹000000"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"/>
 
-        <TextView
-            android:id="@+id/loan_amount_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/akaya_telivigala"
-            android:text="Loan Amount: ₹000000"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"/>
+            <SeekBar
+                android:id="@+id/down_payment_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:max="600000"
+                android:progress="5000"
+                android:progressTint="#00BCD4"
+                android:thumbTint="#00BCD4"
+                android:paddingVertical="8dp"
+                android:layout_marginVertical="4dp"/>
 
-        <TextView
-            android:id="@+id/interest_rate_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/akaya_telivigala"
-            android:text="Interest Rate: 10%"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"/>
+            <TextView
+                android:id="@+id/loan_amount_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_telivigala"
+                android:text="Loan Amount: ₹000000"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"/>
 
-        <SeekBar
-            android:id="@+id/interest_rate_seekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="20"
-            android:progress="10"
-            android:progressTint="#00BCD4"
-            android:thumbTint="#00BCD4"/>
+            <TextView
+                android:id="@+id/interest_rate_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_telivigala"
+                android:text="Interest Rate: 10%"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"/>
 
-        <TextView
-            android:id="@+id/tenure_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/akaya_telivigala"
-            android:text="Tenure: years"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"/>
+            <SeekBar
+                android:id="@+id/interest_rate_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:max="20"
+                android:progress="10"
+                android:progressTint="#00BCD4"
+                android:thumbTint="#00BCD4"
+                android:paddingVertical="8dp"
+                android:layout_marginVertical="4dp"/>
 
-        <SeekBar
-            android:id="@+id/tenure_seekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="30"
-            android:progress="15"
-            android:progressTint="#00BCD4"
-            android:thumbTint="#00BCD4"/>
+            <TextView
+                android:id="@+id/tenure_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_telivigala"
+                android:text="Tenure: years"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"/>
 
-        <TextView
-            android:id="@+id/emi_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/akaya_telivigala"
-            android:text="EMI: ₹0"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"/>
-    </LinearLayout>
+            <SeekBar
+                android:id="@+id/tenure_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:max="30"
+                android:progress="15"
+                android:progressTint="#00BCD4"
+                android:thumbTint="#00BCD4"
+                android:paddingVertical="8dp"
+                android:layout_marginVertical="4dp"/>
+
+            <TextView
+                android:id="@+id/emi_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_telivigala"
+                android:text="EMI: ₹0"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/back_to_main_button"
@@ -135,8 +164,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
         android:backgroundTint="#8E44AD"
-        android:textColor="#FFFFFF"
         android:paddingHorizontal="32dp"
-        android:paddingVertical="12dp"/>
+        android:textColor="#FFFFFF"/>
 
 </RelativeLayout>
