@@ -55,13 +55,17 @@
         android:padding="16dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/gst_calculator_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="8dp"
-            app:cardBackgroundColor="#3D3D3D">
+            app:cardBackgroundColor="#3D3D3D"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,8 +75,7 @@
                 android:padding="16dp">
 
                 <ImageView
-                    android:id="@+id/gsttax"
-                    android:layout_width="64dp"
+                    android:layout_width="162dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tax" />
 
@@ -89,13 +92,17 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/emi_calculator_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="8dp"
-            app:cardBackgroundColor="#3D3D3D">
+            app:cardBackgroundColor="#3D3D3D"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,8 +112,7 @@
                 android:padding="16dp">
 
                 <ImageView
-                    android:id="@+id/emic"
-                    android:layout_width="64dp"
+                    android:layout_width="174dp"
                     android:layout_height="64dp"
                     android:src="@drawable/emi" />
 
@@ -124,22 +130,12 @@
 
     </GridLayout>
 
-    <Switch
-        android:id="@+id/theme_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/grid_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="Dark Mode"
-        android:textColor="#000000" />
-
     <Button
         android:id="@+id/history_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/theme_switch"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/grid_layout"
+        android:layout_marginTop="24dp"
         android:layout_marginHorizontal="32dp"
         android:text="VIEW HISTORY"
         android:backgroundTint="#8E44AD" />
