@@ -9,80 +9,85 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.taxloancalci.data.AppDatabase;
+import com.example.taxloancalci.data.CalculationEntity;
+
 public class gst_calculator extends AppCompatActivity {
+
+    private AppDatabase db;
+    private float totalPrice, gstPercentage, netPrice, gstPrice;
+    private SeekBar totalPriceSeekBar, gstPercentageSeekBar;
+    private TextView totalPriceTextView, gstPercentageTextView, netPriceTextView, gstPriceTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gst_calculator);
-        SeekBar totalPriceSeekBar = findViewById(R.id.total_price_seekbar);
-        SeekBar gstPercentageSeekBar = findViewById(R.id.gst_percentage_seekbar);
-        TextView totalPriceTextView = findViewById(R.id.total_price_textview);
-        TextView gstPercentageTextView = findViewById(R.id.gst_percentage_textview);
-        TextView netPriceTextView = findViewById(R.id.net_price_textview);
-        TextView gstPriceTextView = findViewById(R.id.gst_price_textview);
+
+        db = AppDatabase.getDatabase(this);
+
+        totalPriceSeekBar = findViewById(R.id.total_price_seekbar);
+        gstPercentageSeekBar = findViewById(R.id.gst_percentage_seekbar);
+        totalPriceTextView = findViewById(R.id.total_price_textview);
+        gstPercentageTextView = findViewById(R.id.gst_percentage_textview);
+        netPriceTextView = findViewById(R.id.net_price_textview);
+        gstPriceTextView = findViewById(R.id.gst_price_textview);
         Button backButton = findViewById(R.id.back_to_main_button);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveCalculation();
                 Intent intent = new Intent(gst_calculator.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-
         totalPriceSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                totalPriceTextView.setText("Total Price: " + progress);
-
-                float totalPrice = progress;
-                float gstPercentage = (float)gstPercentageSeekBar.getProgress() / 100;
-                float gstPrice =totalPrice*(gstPercentage);
-                float netPrice = totalPrice/(1+(gstPercentage));
-
-                netPriceTextView.setText("Net Price: " + netPrice);
-                gstPriceTextView.setText("GST Price: " + gstPrice);
-
-
+                updateCalculation(progress, gstPercentageSeekBar.getProgress());
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
         gstPercentageSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                gstPercentageTextView.setText("GST Percentage: " + progress + "%");
-
-
-                float totalPrice = totalPriceSeekBar.getProgress();
-                float gstPercentage = progress;
-                float netPrice = totalPrice / (1 + (gstPercentage / 100));
-                float gstPrice = totalPrice - netPrice;
-
-
-                netPriceTextView.setText("Net Price: " + netPrice);
-                gstPriceTextView.setText("GST Price: " + gstPrice);
+                updateCalculation(totalPriceSeekBar.getProgress(), progress);
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
+    }
+
+    private void saveCalculation() {
+        String details = String.format("Total Price: ₹%.2f, GST: %.2f%%, Net Price: ₹%.2f, GST Price: ₹%.2f",
+                totalPrice, gstPercentage, netPrice, gstPrice);
+        CalculationEntity calculation = new CalculationEntity("GST", details, System.currentTimeMillis());
+
+        new Thread(() -> db.calculationDao().insert(calculation)).start();
+    }
+
+    private void updateCalculation(float totalPrice, float gstPercentage) {
+        this.totalPrice = totalPrice;
+        this.gstPercentage = gstPercentage;
+        this.gstPrice = totalPrice * (gstPercentage / 100);
+        this.netPrice = totalPrice / (1 + (gstPercentage / 100));
+
+        totalPriceTextView.setText("Total Price: ₹" + totalPrice);
+        gstPercentageTextView.setText("GST Percentage: " + gstPercentage + "%");
+        netPriceTextView.setText("Net Price: ₹" + String.format("%.2f", netPrice));
+        gstPriceTextView.setText("GST Price: ₹" + String.format("%.2f", gstPrice));
     }
 }
