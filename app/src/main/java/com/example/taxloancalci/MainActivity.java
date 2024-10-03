@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Button;
 
 import com.example.taxloancalci.data.AppDatabase;
@@ -23,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Check if dark mode is enabled
+        if (isDarkModeOn()) {
+            showDarkModeAlert();
+        }
 
         // Initialize database
         db = AppDatabase.getDatabase(this);
@@ -46,6 +53,30 @@ public class MainActivity extends AppCompatActivity {
                 showExitDialog();
             }
         });
+    }
+
+    private boolean isDarkModeOn() {
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    private void showDarkModeAlert() {
+        new AlertDialog.Builder(this)
+                .setTitle("Dark Mode Detected")
+                .setMessage("Dark mode is currently enabled. For a better experience, it's recommended to use light mode. Would you like to disable dark mode?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        openDisplaySettings();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void openDisplaySettings() {
+        Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
+        startActivity(intent);
     }
 
     private void showExitDialog() {
