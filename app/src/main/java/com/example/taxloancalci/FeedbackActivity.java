@@ -28,17 +28,20 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
+        // Set the background to @drawable/hd
+        getWindow().setBackgroundDrawableResource(R.drawable.dark_background_xxhdpi);
+
         db = FirebaseFirestore.getInstance(); // Initialize Firestore
 
         nameEditText = findViewById(R.id.name_edit_text);
         emailEditText = findViewById(R.id.email_edit_text);
         messageEditText = findViewById(R.id.message_edit_text);
         submitButton = findViewById(R.id.submit_button);
-        rateButton = findViewById(R.id.rate_button);
+        //rateButton = findViewById(R.id.rate_button);
         backButton = findViewById(R.id.back_button);
 
         submitButton.setOnClickListener(v -> submitFeedback());
-        rateButton.setOnClickListener(v -> openGooglePlay());
+        //rateButton.setOnClickListener(v -> openGooglePlay());
         backButton.setOnClickListener(v -> navigateBackHome());
     }
 
@@ -80,14 +83,14 @@ public class FeedbackActivity extends AppCompatActivity {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    private void openGooglePlay() {
-        String appPackageName = getPackageName();
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-        } catch (android.content.ActivityNotFoundException anfe) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-        }
-    }
+//   // private void openGooglePlay() {
+//        String appPackageName = getPackageName();
+//        try {
+//            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+//        } catch (android.content.ActivityNotFoundException anfe) {
+//            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+//        }
+//    }
 
     private void navigateBackHome() {
         Intent intent = new Intent(FeedbackActivity.this, MainActivity.class);

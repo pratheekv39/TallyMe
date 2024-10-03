@@ -8,6 +8,8 @@
     android:layout_gravity="center"
     android:layout_margin="16dp">
 
+    <!-- App Title -->
+
     <!-- Name EditText -->
     <EditText
         android:id="@+id/name_edit_text"
@@ -15,7 +17,10 @@
         android:layout_height="wrap_content"
         android:hint="Name"
         android:inputType="textPersonName"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#80FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <!-- Email EditText -->
     <EditText
@@ -24,7 +29,10 @@
         android:layout_height="wrap_content"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#80FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <!-- Message EditText -->
     <EditText
@@ -33,31 +41,32 @@
         android:layout_height="wrap_content"
         android:hint="Message"
         android:inputType="textMultiLine"
-        android:layout_marginBottom="12dp"
-        android:minHeight="100dp" />
+        android:layout_marginBottom="24dp"
+        android:minHeight="100dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#80FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <!-- Submit Feedback Button -->
     <Button
         android:id="@+id/submit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit Feedback"
-        android:layout_marginBottom="16dp" />
+        android:text="SUBMIT FEEDBACK"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF" />
 
     <!-- Rate App Button -->
-    <Button
-        android:id="@+id/rate_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rate App"
-        android:layout_marginBottom="16dp" />
 
     <!-- Back to Home Button -->
     <Button
         android:id="@+id/back_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back to Home"
-        android:layout_marginBottom="16dp" />
+        android:text="BACK TO HOME"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

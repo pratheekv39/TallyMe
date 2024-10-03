@@ -33,6 +33,7 @@ public class gst_calculator extends AppCompatActivity {
         netPriceTextView = findViewById(R.id.net_price_textview);
         gstPriceTextView = findViewById(R.id.gst_price_textview);
         Button backButton = findViewById(R.id.back_to_main_button);
+        Button addDetailsManuallyButton = findViewById(R.id.add_details_manually_button);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,14 @@ public class gst_calculator extends AppCompatActivity {
                 Intent intent = new Intent(gst_calculator.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        addDetailsManuallyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(gst_calculator.this, ManualGstCalculatorActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -85,9 +94,9 @@ public class gst_calculator extends AppCompatActivity {
         this.gstPrice = totalPrice * (gstPercentage / 100);
         this.netPrice = totalPrice / (1 + (gstPercentage / 100));
 
-        totalPriceTextView.setText("Total Price: ₹" + totalPrice);
-        gstPercentageTextView.setText("GST Percentage: " + gstPercentage + "%");
-        netPriceTextView.setText("Net Price: ₹" + String.format("%.2f", netPrice));
-        gstPriceTextView.setText("GST Price: ₹" + String.format("%.2f", gstPrice));
+        totalPriceTextView.setText(String.format("Total Price: ₹%.2f", totalPrice));
+        gstPercentageTextView.setText(String.format("GST Percentage: %.2f%%", gstPercentage));
+        netPriceTextView.setText(String.format("Net Price: ₹%.2f", netPrice));
+        gstPriceTextView.setText(String.format("GST Price: ₹%.2f", gstPrice));
     }
 }

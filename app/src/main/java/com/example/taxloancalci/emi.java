@@ -39,6 +39,8 @@ public class emi extends AppCompatActivity {
         loanTextview = findViewById(R.id.loan_amount_textview);
 
         Button backButton = findViewById(R.id.back_to_main_button);
+        Button addDetailsManuallyButton = findViewById(R.id.add_details_manually_button);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +48,14 @@ public class emi extends AppCompatActivity {
                 Intent intent = new Intent(emi.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        addDetailsManuallyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(emi.this, ManualEmiCalculatorActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -88,11 +98,11 @@ public class emi extends AppCompatActivity {
         emi = (principalAmount * monthlyInterestRate * (float) Math.pow(1 + monthlyInterestRate, numPayments))
                 / (float) (Math.pow(1 + monthlyInterestRate, numPayments) - 1);
 
-        totalPriceTextView.setText("Total Price: ₹" + totalPrice);
-        downPaymentTextView.setText("Down Payment: ₹" + downPayment);
-        loanTextview.setText("Loan Amount: ₹" + principalAmount);
-        interestRateTextView.setText("Interest Rate: " + interestRate + "%");
-        tenureTextView.setText("Tenure: " + tenure + " years");
-        emiTextView.setText("EMI: ₹" + String.format("%.2f", emi));
+        totalPriceTextView.setText(String.format("Total Price: ₹%.2f", totalPrice));
+        downPaymentTextView.setText(String.format("Down Payment: ₹%.2f", downPayment));
+        loanTextview.setText(String.format("Loan Amount: ₹%.2f", principalAmount));
+        interestRateTextView.setText(String.format("Interest Rate: %.2f%%", interestRate));
+        tenureTextView.setText(String.format("Tenure: %.0f years", tenure));
+        emiTextView.setText(String.format("EMI: ₹%.2f", emi));
     }
 }
