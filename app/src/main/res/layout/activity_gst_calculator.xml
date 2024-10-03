@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="#FAFAFA"
     tools:context=".gst_calculator">
 
     <ImageView
@@ -98,6 +98,19 @@
         android:text="@string/net_price_0"
         android:textColor="#000000"
         android:textSize="24sp" />
+
+    <!-- New "Add Details Manually" button -->
+    <Button
+        android:id="@+id/add_details_manually_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Details Manually"
+        android:layout_above="@id/back_to_main_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#8E44AD"
+        android:paddingHorizontal="32dp"
+        android:textColor="#FFFFFF"/>
 
     <Button
         android:id="@+id/back_to_main_button"

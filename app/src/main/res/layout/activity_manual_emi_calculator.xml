@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_view"
+        android:padding="16dp"
+        android:src="@drawable/finance" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/carter_one"
+        android:text="Manual EMI Calculator"
+        android:textColor="#000000"
+        android:textSize="28sp" />
+
+    <EditText
+        android:id="@+id/total_price_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="Enter Total Price"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/down_payment_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Enter Down Payment"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/interest_rate_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Enter Interest Rate (%)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/tenure_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Enter Tenure (years)"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/calculate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:text="Calculate"
+        android:backgroundTint="#8E44AD"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/loan_amount_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/emi_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:text="Back"
+        android:backgroundTint="#8E44AD"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>

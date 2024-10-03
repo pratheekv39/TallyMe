@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="#FAFAFA"
     tools:context=".emi">
 
     <ImageView
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/calculator_title"
-        android:layout_above="@id/back_to_main_button"
+        android:layout_above="@id/button_container"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
 
@@ -155,16 +155,35 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/back_to_main_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BACK TO MAIN"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="#8E44AD"
-        android:paddingHorizontal="32dp"
-        android:textColor="#FFFFFF"/>
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/add_details_manually_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD DETAILS MANUALLY"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#8E44AD"
+            android:paddingHorizontal="16dp"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/back_to_main_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BACK TO MAIN"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#8E44AD"
+            android:paddingHorizontal="32dp"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
