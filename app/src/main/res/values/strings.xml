@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TaxLoan Calci</string>
+    <string name="app_name">TallyMe</string>
     <string name="todo">TODO</string>
     <string name="total_price_0">Total Price: $ 0</string>
     <string name="down_payment_0">down_payment: 0</string>

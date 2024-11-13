@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         maven{url 'https://jitpack.io'}
     }
 }
-rootProject.name = "TaxLoan Calci"
+rootProject.name = "TallyMe"
 include ':app'
