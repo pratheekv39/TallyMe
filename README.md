@@ -1,5 +1,9 @@
 # TallyMe
 
+<a href="https://play.google.com/store/apps/details?id=io.pratheekv39.tallyme&hl=en_IN">
+  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="80">
+</a>
+
 Welcome to TallyMe, your go-to solution for GST and EMI calculations! This app allows users to perform complex calculations quickly and easily, making financial management a breeze.
 
 ## Features
